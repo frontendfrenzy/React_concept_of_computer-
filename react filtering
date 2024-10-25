@@ -1,0 +1,55 @@
+//FILTER THE PRODUCT ABOUT IN REACT
+
+import React, { useState } from 'react';
+
+const products = [
+  { id: 1, name: 'Blue T-Shirt', category: 'T-Shirt' },
+  { id: 2, name: 'Black Hoodie', category: 'Hoodie' },
+  { id: 3, name: 'White Shirt', category: 'Shirt' },
+  { id: 4, name: 'Red T-Shirt', category: 'T-Shirt' },
+  { id: 5, name: 'Green Things', category: 'Things' },
+];
+
+function FilterButtons({ setCategory }) {
+  return (
+    <div>
+      <button onClick={() => setCategory('All')}>All</button>
+      <button onClick={() => setCategory('T-Shirt')}>T-Shirt</button>
+      <button onClick={() => setCategory('Hoodie')}>Hoodie</button>
+      <button onClick={() => setCategory('Shirt')}>Shirt</button>
+      <button onClick={() => setCategory('Things')}>Things</button>
+    </div>
+  );
+}
+
+function ProductList({ category }) {
+  const filteredProducts = category === 'All' ? products : products.filter(product => product.category === category);
+
+  return (
+    <div>
+      <h2>Products</h2>
+      {filteredProducts.length === 0 ? (
+        <p>No products found.</p>
+      ) : (
+        filteredProducts.map((product) => (
+          <div key={product.id} style={{ border: '1px solid gray', padding: '10px', margin: '10px' }}>
+            <h3>{product.name}</h3>
+            <p>Category: {product.category}</p>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  const [category, setCategory] = useState('All');
+
+  return (
+    <div>
+      <h1>Product Filter</h1>
+      <FilterButtons setCategory={setCategory} />
+      <ProductList category={category} />
+    </div>
+  );
+}

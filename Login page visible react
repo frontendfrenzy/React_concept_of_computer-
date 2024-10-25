@@ -1,0 +1,43 @@
+//LOGIN PAGE TO SHOW IN REACT
+
+import React, { useState } from 'react';
+import './App.css'; // Add your CSS styles here
+
+const App = () => {
+  const [showLogin, setShowLogin] = useState(false);
+
+  const handleToggle = () => {
+    setShowLogin(!showLogin); // Toggle the visibility of the login content
+  };
+
+  return (
+    <div className="app">
+      {/* Icon to toggle the login content */}
+      <div className="icon" onClick={handleToggle}>
+        <i className="fas fa-user"></i> {/* Example using FontAwesome icon */}
+      </div>
+
+      {/* Conditionally render login content */}
+      {showLogin && (
+        <div className="login-modal">
+          <div className="login-content">
+            <h2>Login</h2>
+            <form>
+              <label>
+                Username:
+                <input type="text" />
+              </label>
+              <label>
+                Password:
+                <input type="password" />
+              </label>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
